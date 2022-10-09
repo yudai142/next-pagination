@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import Pagination from "../components/Pagination";
+import { paginate } from "./../utils/paginate";
 
 const Home = () => {
   
@@ -19,6 +20,8 @@ const Home = () => {
   const handlePageChange = page => {
     setCurrentPage(page);
   }
+
+  const paginatePosts = paginate(posts, currentPage, pageSize);
   return ( 
     <div className="container">
       <table className="table">
@@ -30,7 +33,7 @@ const Home = () => {
           </tr>
         </thead>
         <tbody>
-          {posts.map(post =>
+          {paginatePosts.map(post =>
             <tr key={post.id}>
               <td>{post.id}</td>
               <td>{post.title}</td>
